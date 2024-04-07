@@ -1,0 +1,35 @@
+
+<div class="table-container">
+    <button mat-raised-button color="primary" routerLink="/create">Create</button>
+    <table mat-table [dataSource]="employees">
+      <!-- Define table columns -->
+      <ng-container matColumnDef="firstName">
+        <th mat-header-cell *matHeaderCellDef> First Name </th>
+        <td mat-cell *matCellDef="let employee"> {{employee.first_name}} </td>
+      </ng-container>
+      <!-- Define other columns (last_name, email) similarly -->
+      <ng-container matColumnDef="lastName">
+        <th mat-header-cell *matHeaderCellDef> Last Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+      </ng-container>
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef> Email </th>
+        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+      </ng-container>
+      <!-- Define the "Action" column -->
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <td mat-cell *matCellDef="let element" class="action-buttons">
+          <!-- View Button -->
+          <button mat-button class="action-button view" (click)="viewEmployee(employee.id)" *ngFor="let employee of employees">View</button>
+          <!-- Edit Button -->
+          <button mat-button class="action-button edit">Edit</button>
+          <!-- Delete Button -->
+          <button mat-button  class="action-button delete" (click)="deleteEmployee(element.id)">Delete</button>
+        </td>
+      </ng-container>
+      <!-- Header and Row definitions -->
+      <tr mat-header-row *matHeaderRowDef="['firstName', 'lastName', 'email', 'action']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['firstName', 'lastName', 'email', 'action']"></tr>
+    </table>
+  </div>
